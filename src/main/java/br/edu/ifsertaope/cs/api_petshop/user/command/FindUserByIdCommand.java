@@ -4,19 +4,20 @@ import br.edu.ifsertaope.cs.api_petshop.core.command.Command;
 import br.edu.ifsertaope.cs.api_petshop.user.entity.User;
 import br.edu.ifsertaope.cs.api_petshop.user.repository.UserRepository;
 
-public class CreateUserCommand implements Command<User> {
+public class FindUserByIdCommand implements Command<User> {
 
     private final UserRepository repository;
-    private final User user;
+    private final Long Id;
 
-    public CreateUserCommand(UserRepository repository, User user) {
+    public FindUserByIdCommand(UserRepository repository, Long Id) {
         this.repository = repository;
-        this.user = user;
+        this.Id = Id;
     }
 
     @Override
     public User execute() {
-        return repository.save(user);
+        return repository.findById(Id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
 }

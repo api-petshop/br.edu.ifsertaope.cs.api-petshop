@@ -1,22 +1,22 @@
 package br.edu.ifsertaope.cs.api_petshop.user.command;
 
 import br.edu.ifsertaope.cs.api_petshop.core.command.Command;
-import br.edu.ifsertaope.cs.api_petshop.user.entity.User;
 import br.edu.ifsertaope.cs.api_petshop.user.repository.UserRepository;
 
-public class CreateUserCommand implements Command<User> {
+public class DeleteUserCommand implements Command<Void> {
 
     private final UserRepository repository;
-    private final User user;
+    private final Long Id;
 
-    public CreateUserCommand(UserRepository repository, User user) {
+    public DeleteUserCommand(UserRepository repository, Long Id) {
         this.repository = repository;
-        this.user = user;
+        this.Id = Id;
     }
 
     @Override
-    public User execute() {
-        return repository.save(user);
+    public Void execute() {
+        repository.deleteById(Id);
+        return null;
     }
 
 }

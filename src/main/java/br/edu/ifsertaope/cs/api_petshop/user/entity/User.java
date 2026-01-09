@@ -41,4 +41,7 @@ public class User {
     @Column(nullable = false)
     private Boolean isActive = true;
 
+    @Column
+    private String authToken;
+
 }
