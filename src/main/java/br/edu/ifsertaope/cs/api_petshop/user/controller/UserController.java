@@ -3,7 +3,6 @@ package br.edu.ifsertaope.cs.api_petshop.user.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifsertaope.cs.api_petshop.user.dto.LoginDTO;
 import br.edu.ifsertaope.cs.api_petshop.user.entity.User;
 import br.edu.ifsertaope.cs.api_petshop.user.facade.UserFacade;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping("/users")
@@ -50,16 +48,6 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         facade.deleteUser(id);
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody LoginDTO dto) {
-        return facade.login(dto.getEmail(), dto.getPassword());
-    }
-
-    @PostMapping("/logout")
-    public void logout(@RequestHeader("Authorization") String token) {
-        facade.logout(token);
     }
 
 }

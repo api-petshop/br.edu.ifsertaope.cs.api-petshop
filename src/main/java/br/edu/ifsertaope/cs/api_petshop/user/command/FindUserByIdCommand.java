@@ -16,8 +16,7 @@ public class FindUserByIdCommand implements Command<User> {
 
     @Override
     public User execute() {
-        return repository.findById(Id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return repository.findById(Id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
 }

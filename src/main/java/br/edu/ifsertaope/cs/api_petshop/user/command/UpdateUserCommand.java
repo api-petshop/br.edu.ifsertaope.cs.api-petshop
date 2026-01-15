@@ -18,8 +18,7 @@ public class UpdateUserCommand implements Command<User> {
 
     @Override
     public User execute() {
-        User user = repository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        User user = repository.findById(userId).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         user.setName(updatedUser.getName());
         user.setEmail(updatedUser.getEmail());
