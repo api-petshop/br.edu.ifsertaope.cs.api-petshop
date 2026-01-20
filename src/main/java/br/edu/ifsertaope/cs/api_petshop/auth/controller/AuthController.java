@@ -3,15 +3,15 @@ package br.edu.ifsertaope.cs.api_petshop.auth.controller;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ifsertaope.cs.api_petshop.auth.dto.LoginRequest;
-import br.edu.ifsertaope.cs.api_petshop.user.facade.UserFacade;
+import br.edu.ifsertaope.cs.api_petshop.auth.facade.AuthFacade;;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserFacade facade;
+    private final AuthFacade facade;
 
-    public AuthController(UserFacade facade) {
+    public AuthController(AuthFacade facade) {
         this.facade = facade;
     }
 

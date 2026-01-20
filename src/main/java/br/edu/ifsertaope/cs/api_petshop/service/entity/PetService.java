@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Service {
+public class PetService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
