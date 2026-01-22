@@ -1,5 +1,7 @@
 package br.edu.ifsertaope.cs.api_petshop.order.entity;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.edu.ifsertaope.cs.api_petshop.product.entity.Product;
@@ -39,4 +41,12 @@ public class OrderItem {
 
     @Column(nullable = false)
     private Integer quantity;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal unitPrice;
+
+    public BigDecimal getSubtotal() {
+        return unitPrice.multiply(BigDecimal.valueOf(quantity));
+    }
+
 }

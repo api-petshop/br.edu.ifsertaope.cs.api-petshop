@@ -6,21 +6,25 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifsertaope.cs.api_petshop.order.command.*;
 import br.edu.ifsertaope.cs.api_petshop.order.entity.Order;
-import br.edu.ifsertaope.cs.api_petshop.order.entity.OrderItem;
 import br.edu.ifsertaope.cs.api_petshop.order.repository.OrderRepository;
+import br.edu.ifsertaope.cs.api_petshop.product.repository.ProductRepository;
 import br.edu.ifsertaope.cs.api_petshop.user.repository.UserRepository;
 
 @Service
 public class OrderFacade {
 
+    private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
     public OrderFacade(
             OrderRepository orderRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository,
+            ProductRepository productRepository) {
+
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     public Order createOrder(Long userId) {
@@ -34,8 +38,13 @@ public class OrderFacade {
         return orderRepository.findByUser_Id(userId);
     }
 
-    public Order addItem(Long orderId, OrderItem item) {
-        return new AddItemToOrderCommand(orderRepository, orderId, item).execute();
+    public Order addItem(Long orderId, Long productId, Integer quantity) {
+        return new AddItemToOrderCommand(
+                orderRepository,
+                productRepository,
+                orderId,
+                productId,
+                quantity).execute();
     }
 
     public Order removeItem(Long orderId, Long itemId) {
@@ -44,6 +53,10 @@ public class OrderFacade {
 
     public List<Order> listAll() {
         return new ListAllOrderCommand(orderRepository).execute();
+    }
+
+    public Order finalizeOrder(Long orderId) {
+        return new FinalizeOrderCommand(orderRepository, orderId).execute();
     }
 
 }

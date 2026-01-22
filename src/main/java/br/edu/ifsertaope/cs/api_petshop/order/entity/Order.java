@@ -1,5 +1,6 @@
 package br.edu.ifsertaope.cs.api_petshop.order.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,15 @@ public class Order {
 
     @Column(nullable = false)
     private String status; // CRIADO, CANCELADO, FINALIZADO
+
+    @Column(nullable = false)
+    private BigDecimal totalValue = BigDecimal.ZERO;
+
+    public BigDecimal calculateTotal() {
+        return items.stream()
+                .map(OrderItem::getSubtotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifsertaope.cs.api_petshop.order.entity.Order;
-import br.edu.ifsertaope.cs.api_petshop.order.entity.OrderItem;
 import br.edu.ifsertaope.cs.api_petshop.order.facade.OrderFacade;
 
 @RestController
@@ -36,8 +34,12 @@ public class OrderController {
     }
 
     @PostMapping("/{orderId}/items")
-    public Order addItem(@PathVariable Long orderId, @RequestBody OrderItem item) {
-        return facade.addItem(orderId, item);
+    public Order addItem(
+            @PathVariable Long orderId,
+            @RequestParam Long productId,
+            @RequestParam Integer quantity) {
+
+        return facade.addItem(orderId, productId, quantity);
     }
 
     @DeleteMapping("/{orderId}/items/{itemId}")
@@ -48,6 +50,11 @@ public class OrderController {
     @GetMapping
     public List<Order> listAll() {
         return facade.listAll();
+    }
+
+    @PostMapping("/{orderId}/finalize")
+    public Order finalizeOrder(@PathVariable Long orderId) {
+        return facade.finalizeOrder(orderId);
     }
 
 }
