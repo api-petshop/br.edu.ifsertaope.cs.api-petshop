@@ -40,14 +40,4 @@ public class UserFacade {
     public void deleteUser(Long id) {
         new DeleteUserCommand(repository, id).execute();
     }
-
-    /* LOGIN */
-    public String login(String email, String password) {
-        return new LoginCommand(repository, email, password).execute();
-    }
-
-    /* LOGOUT */
-    public void logout(String token) {
-        new LogoutCommand(repository, token).execute();
-    }
 }

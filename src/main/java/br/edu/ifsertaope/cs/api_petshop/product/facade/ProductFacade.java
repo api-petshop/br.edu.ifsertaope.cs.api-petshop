@@ -24,7 +24,11 @@ public class ProductFacade {
 
     /* READ */
     public List<Product> listAllProducts() {
-        return new ListProductsCommand(repository).execute();
+        return new ListProductsCommand(repository, null).execute();
+    }
+
+    public List<Product> listProductsByCategory(String category) {
+        return new ListProductsCommand(repository, category).execute();
     }
 
     public Product findProductbyId(Long id) {

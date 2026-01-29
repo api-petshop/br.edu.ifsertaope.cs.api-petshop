@@ -59,4 +59,8 @@ public class OrderFacade {
         return new FinalizeOrderCommand(orderRepository, orderId).execute();
     }
 
+    public Order findById(Long orderId) {
+        return new FindOrderByIdCommand(orderRepository, orderId).execute();
+    }
+
 }

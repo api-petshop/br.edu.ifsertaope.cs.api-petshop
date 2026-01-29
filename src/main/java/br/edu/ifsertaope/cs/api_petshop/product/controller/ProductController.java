@@ -32,7 +32,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> listAll() {
+    public List<Product> listAll(
+            @RequestParam(required = false) String category) {
+        if (category != null) {
+            return facade.listProductsByCategory(category);
+        }
         return facade.listAllProducts();
     }
 

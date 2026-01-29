@@ -2,7 +2,7 @@ package br.edu.ifsertaope.cs.api_petshop.auth.facade;
 
 import org.springframework.stereotype.Service;
 
-import br.edu.ifsertaope.cs.api_petshop.user.command.*;
+import br.edu.ifsertaope.cs.api_petshop.auth.command.*;
 import br.edu.ifsertaope.cs.api_petshop.user.repository.UserRepository;
 
 @Service

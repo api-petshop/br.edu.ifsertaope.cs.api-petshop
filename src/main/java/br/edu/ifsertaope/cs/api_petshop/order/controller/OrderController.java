@@ -57,4 +57,9 @@ public class OrderController {
         return facade.finalizeOrder(orderId);
     }
 
+    @GetMapping("/{orderId}")
+    public Order findById(@PathVariable Long orderId) {
+        return facade.findById(orderId);
+    }
+
 }
